@@ -1,5 +1,119 @@
 # pattern-design
 
+---
+
+### **1. DRY (Don't Repeat Yourself)**
+
+El principio **DRY** sugiere evitar la duplicación de código. Si encuentras que estás repitiendo la misma lógica, abstrae esa lógica en una función reutilizable.
+
+#### **Ejemplo sin DRY (código repetido):**
+```javascript
+function calculateAreaOfSquare(side) {
+  return side * side;
+}
+
+function calculateAreaOfRectangle(length, width) {
+  return length * width;
+}
+
+function calculateAreaOfCircle(radius) {
+  return Math.PI * radius * radius;
+}
+```
+
+#### **Ejemplo con DRY (código reutilizable):**
+```javascript
+function calculateArea(shape, ...dimensions) {
+  switch (shape) {
+    case "square":
+      return dimensions[0] * dimensions[0];
+    case "rectangle":
+      return dimensions[0] * dimensions[1];
+    case "circle":
+      return Math.PI * dimensions[0] * dimensions[0];
+    default:
+      throw new Error("Shape not supported");
+  }
+}
+
+console.log(calculateArea("square", 4)); // 16
+console.log(calculateArea("rectangle", 4, 5)); // 20
+console.log(calculateArea("circle", 3)); // 28.27
+```
+
+---
+
+### **2. KISS (Keep It Simple, Stupid)**
+
+El principio **KISS** sugiere que el código debe ser lo más simple posible. Evita complejidad innecesaria y escribe código fácil de entender.
+
+#### **Ejemplo sin KISS (código innecesariamente complejo):**
+```javascript
+function isEven(number) {
+  if (number % 2 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+```
+
+#### **Ejemplo con KISS (código simple y claro):**
+```javascript
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+console.log(isEven(4)); // true
+console.log(isEven(5)); // false
+```
+
+---
+
+### **3. YAGNI (You Aren't Gonna Need It)**
+
+El principio **YAGNI** sugiere que no debes implementar funcionalidades que no necesitas en este momento. Solo escribe el código necesario para cumplir con los requisitos actuales.
+
+#### **Ejemplo sin YAGNI (funcionalidad innecesaria):**
+```javascript
+function fetchData(url, options = {}) {
+  // Código para manejar múltiples tipos de autenticación, aunque no se necesita ahora.
+  if (options.authType === "OAuth") {
+    console.log("Handling OAuth...");
+  } else if (options.authType === "APIKey") {
+    console.log("Handling API Key...");
+  }
+
+  // Código para manejar múltiples formatos de respuesta, aunque no se necesita ahora.
+  if (options.responseType === "XML") {
+    console.log("Handling XML response...");
+  }
+
+  console.log(`Fetching data from ${url}`);
+}
+```
+
+#### **Ejemplo con YAGNI (solo lo necesario):**
+```javascript
+function fetchData(url) {
+  console.log(`Fetching data from ${url}`);
+}
+
+fetchData("https://api.example.com/data");
+// Salida: Fetching data from https://api.example.com/data
+```
+
+---
+
+### **Resumen**
+- **DRY**: Evita duplicar código. Usa funciones reutilizables.
+- **KISS**: Mantén el código simple y fácil de entender.
+- **YAGNI**: No implementes funcionalidades innecesarias hasta que realmente las necesites.
+
+Estos principios ayudan a mantener el código limpio, eficiente y fácil de mantener.
+
+
+---
 Aquí tienes una explicación más detallada de los patrones de diseño, con ejemplos reescritos para mayor claridad y contexto. Los patrones de diseño son soluciones probadas para problemas comunes en el diseño de software. Ayudan a estructurar el código de manera eficiente, reutilizable y mantenible.
 
 ---
